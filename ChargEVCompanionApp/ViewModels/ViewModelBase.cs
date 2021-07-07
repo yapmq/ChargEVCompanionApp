@@ -9,18 +9,18 @@ namespace ChargEVCompanionApp.ViewModels
 {
     public class ViewModelBase : BaseViewModel
     {
+        public event PropertyChangedEventHandler PropertyChange;
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {
             if (!Equals(field, newValue))
             {
                 field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChange?.Invoke(this, new PropertyChangedEventArgs(propertyName));
                 return true;
             }
 
             return false;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
