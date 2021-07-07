@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ChargEVCompanionApp.Views
+namespace ChargEVCompanionApp.Views.UserPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class NewsPage : ContentPage
     {
-        public LoginPage()
+        public NewsPage()
         {
             InitializeComponent();
         }
