@@ -1,4 +1,5 @@
 ﻿using ChargEVCompanionApp.Models;
+using MvvmHelpers;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace ChargEVCompanionApp.Services
     public static class DatabaseHandler
     {
         static SQLiteAsyncConnection db;
-        static async Task Init()
+        async static Task Init()
         {
             if (db != null)
                 return;
@@ -23,21 +24,23 @@ namespace ChargEVCompanionApp.Services
             db = new SQLiteAsyncConnection(databasePath);
 
             await db.CreateTableAsync<News>();
+
         }
 
-        //public static async Task AddNews(string title, string context)
-        //{
-        //    await Init();
-        //    //var image = "https://www.yesplz.coffee/app/uploads/2020/11/emptybag-min.png";
-        //    var news = new News
-        //    {
-        //        Title = title,
-        //        Roaster = roaster,
-        //        Image = image
-        //    };
+        public static async Task AddNews(string title, string context)
+        {
+            await Init();
+            //var image = "https://www.yesplz.coffee/app/uploads/2020/11/emptybag-min.png";
+            var datecreated = DateTime.Now;
+            var news = new News
+            {
+                Title = title,
+                Context = context,
+                DateCreated = datecreated
+            };
 
-        //    var id = await db.InsertAsync(coffee);
-        //}
+            var id = await db.InsertAsync(news);
+        }
 
         //public static async Task RemoveCoffee(int id)
         //{
@@ -55,14 +58,13 @@ namespace ChargEVCompanionApp.Services
         //    return coffee;
         //}
 
-        //public static async Task<Coffee> GetCoffee(int id)
-        //{
-        //    await Init();
+        public static async Task<News> GetNews(int id)
+        {
+            await Init();
 
-        //    var coffee = await db.Table<Coffee>()
-        //        .FirstOrDefaultAsync(c => c.Id == id);
+            var news = await db.Table<News>().FirstOrDefaultAsync(n => n.Id == id);
 
-        //    return coffee;
-        //}
+            return news;
+        }
     }
 }
