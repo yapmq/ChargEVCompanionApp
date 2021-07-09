@@ -1,4 +1,5 @@
 ﻿using ChargEVCompanionApp.Models;
+using ChargEVCompanionApp.Services;
 using ChargEVCompanionApp.Views.AdminPages;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
@@ -15,11 +16,15 @@ namespace ChargEVCompanionApp.ViewModels
 {
     public class NewsPageViewModel : ViewModelBase
     {
-        public ObservableRangeCollection<News> News { get; set; }
+        public ObservableRangeCollection<News> NewsList { get; set; }
         public NewsPageViewModel()
         {
             Title = "News and Media";
-            News = new ObservableRangeCollection<News>();
+            NewsList = new ObservableRangeCollection<News>();
+            NewsList.Add(new News { Title = "hello world", Context = "testing123", DateCreated = DateTime.Today });
+
+            //var news = DatabaseHandler.GetNews();
+
             AddCommand = new AsyncCommand(Add);
 
         }

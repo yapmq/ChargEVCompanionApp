@@ -19,9 +19,14 @@
 
     <ListView
         CachingStrategy="RecycleElement"
-        ItemsSource="{Binding News}"
+        ItemsSource="{Binding NewsList}"
         SelectionMode="Single">
         <ListView.ItemTemplate>
+            <DataTemplate x:DataType ="model:News">
+                <TextCell Detail="{Binding Context}" Text="{Binding Title}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <!--<ListView.ItemTemplate>
             <DataTemplate x:DataType="model:News">
                 <ViewCell>
                     <Grid Padding="10">
@@ -44,6 +49,6 @@
                     </Grid>
                 </ViewCell>
             </DataTemplate>
-        </ListView.ItemTemplate>
+        </ListView.ItemTemplate>-->
     </ListView>
 </ContentPage>
