@@ -58,11 +58,11 @@ namespace ChargEVCompanionApp.Services
         //    return coffee;
         //}
 
-        public static async Task<News> GetNews(int id)
+        public static async Task<IEnumerable<News>> GetNews()
         {
             await Init();
 
-            var news = await db.Table<News>().FirstOrDefaultAsync(n => n.Id == id);
+            var news = await db.Table<News>().ToListAsync();
 
             return news;
         }

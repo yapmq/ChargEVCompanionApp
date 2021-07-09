@@ -1,4 +1,5 @@
 ﻿using ChargEVCompanionApp.Services;
+using ChargEVCompanionApp.Views.UserPages;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,9 @@ namespace ChargEVCompanionApp.ViewModels
                 await DatabaseHandler.AddNews(newsTitle, newsContext);
 
                 await Shell.Current.DisplayAlert("Success", "data added", "ok");
+
+                var route = nameof(NewsPage);
+                await Shell.Current.GoToAsync(route);
             }
         }
 

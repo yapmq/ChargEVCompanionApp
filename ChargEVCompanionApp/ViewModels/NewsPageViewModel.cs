@@ -17,17 +17,31 @@ namespace ChargEVCompanionApp.ViewModels
     public class NewsPageViewModel : ViewModelBase
     {
         public ObservableRangeCollection<News> NewsList { get; set; }
+        public AsyncCommand RefreshCommand { get; }
         public NewsPageViewModel()
         {
             Title = "News and Media";
             NewsList = new ObservableRangeCollection<News>();
-            NewsList.Add(new News { Title = "hello world", Context = "testing123", DateCreated = DateTime.Today });
+            //NewsList.Add(new News { Title = "hello world", Context = "testing123", DateCreated = DateTime.Today });
 
-            //var news = DatabaseHandler.GetNews();
-
+            RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
 
         }
+
+        async Task Refresh()
+        {
+            IsBusy = true;
+
+            await Task.Delay(2000);
+
+            NewsList.Clear();
+            var news = await DatabaseHandler.GetNews();
+            NewsList.AddRange(news);
+
+            IsBusy = false;
+        }
+
 
         public AsyncCommand AddCommand { get; }
 
