@@ -23,10 +23,10 @@ namespace ChargEVCompanionApp.ViewModels
             Title = "News and Media";
             NewsList = new ObservableRangeCollection<News>();
             //NewsList.Add(new News { Title = "hello world", Context = "testing123", DateCreated = DateTime.Today });
-
+            
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
-
+            Refresh();
         }
 
         async Task Refresh()
