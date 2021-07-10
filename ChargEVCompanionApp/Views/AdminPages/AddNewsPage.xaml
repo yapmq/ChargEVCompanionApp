@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.AdminPages.AddNewsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
+    x:DataType="viewmodel:AddNewsPageViewModel"
+    BackgroundColor="{StaticResource WindowBackgroundColor}"
+    Shell.PresentationMode="Modal">
+    <ContentPage.BindingContext>
+        <viewmodel:AddNewsPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Style="{StaticResource LabelMedium}" Text="Name:" />
+            <Entry Text="{Binding NewsTitle}"/>
+            <Label Style="{StaticResource LabelMedium}" Text="Roaster:" />
+            <Entry Text="{Binding NewsContext}"/>
+
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center" />
+
+            <Button
+                Padding="20,0"
+                Command="{Binding SaveCommand}"
+                HorizontalOptions="Center"
+                IsEnabled="{Binding IsNotBusy}"
+                Style="{StaticResource ButtonOutline}"
+                Text="Save"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

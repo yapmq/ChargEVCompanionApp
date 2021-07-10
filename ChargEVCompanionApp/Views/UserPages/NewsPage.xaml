@@ -1,12 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChargEVCompanionApp.Views.UserPages.NewsPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms hehehe!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.UserPages.NewsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="viewmodels:NewsPageViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:NewsPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddCommand}" Text="Add" />
+    </ContentPage.ToolbarItems>
+
+    <ListView
+        CachingStrategy="RecycleElement"
+        ItemsSource="{Binding NewsList}"
+        SelectionMode="Single"
+        IsPullToRefreshEnabled="True"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        RefreshCommand="{Binding RefreshCommand}">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType ="model:News">
+                <TextCell Detail="{Binding Context}" Text="{Binding Title}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <!--<ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:News">
+                <ViewCell>
+                    <Grid Padding="10">
+                        <Frame Style="{StaticResource CoffeeCard}">
+                            <StackLayout VerticalOptions="Center">
+                                <Label
+                                    Style="{StaticResource LabelLarge}"
+                                    Text="{Binding Title}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Style="{StaticResource LabelLarge}"
+                                    Text="{Binding Context}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Style="{StaticResource LabelSmall}"
+                                    Text="{Binding DateCreated}"
+                                    VerticalOptions="Center" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>-->
+    </ListView>
 </ContentPage>
