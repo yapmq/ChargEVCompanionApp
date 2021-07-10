@@ -1,4 +1,5 @@
-﻿using ChargEVCompanionApp.Views.UserPages;
+﻿using ChargEVCompanionApp.Views.AdminPages;
+using ChargEVCompanionApp.Views.UserPages;
 using Xamarin.Forms;
 
 namespace ChargEVCompanionApp
@@ -10,7 +11,7 @@ namespace ChargEVCompanionApp
         {
             InitializeComponent();
 
-            MainPage = new MapPage();
+            MainPage = new AddStationPage();
         }
 
         protected override void OnStart()

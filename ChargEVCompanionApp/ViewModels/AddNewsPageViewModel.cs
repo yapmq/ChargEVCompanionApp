@@ -34,7 +34,7 @@ namespace ChargEVCompanionApp.ViewModels
             }
             else
             {
-                await DatabaseHandler.AddNews(newsTitle, newsContext);
+                await NewsService.AddNews(newsTitle, newsContext);
 
                 await Shell.Current.DisplayAlert("Success", "data added", "ok");
 
