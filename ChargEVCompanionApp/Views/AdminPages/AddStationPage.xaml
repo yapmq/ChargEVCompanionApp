@@ -13,16 +13,24 @@
 
     <ContentPage.Content CompressedLayout.IsHeadless="True">
         <StackLayout x:Name="containerStackLayout">
-            <SearchBar Placeholder="Search location" />
+            <SearchBar
+                x:Name="LocationSearch"
+                Placeholder="Search location"
+                TextChanged="LocationSearch_TextChanged" />
 
             <ListView
                 x:Name="venueListView"
                 Margin="20,0"
                 HorizontalOptions="FillAndExpand"
                 IsPullToRefreshEnabled="True"
+                Refreshing="venueListView_Refreshing"
                 SelectedItem="{Binding Venue, Mode=TwoWay}">
+                <!--
+                    RefreshCommand="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRefreshing}"
+                -->
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Venue">
+                    <DataTemplate>
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
