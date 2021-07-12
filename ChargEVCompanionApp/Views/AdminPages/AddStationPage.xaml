@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.AdminPages.AddStationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    x:DataType="viewmodels:AddStationViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddStationViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content CompressedLayout.IsHeadless="True">
+        <StackLayout x:Name="containerStackLayout">
+            <SearchBar
+                x:Name="LocationSearch"
+                Placeholder="Search location"
+                TextChanged="LocationSearch_TextChanged" />
+
+            <ListView
+                x:Name="venueListView"
+                Margin="20,0"
+                HorizontalOptions="FillAndExpand"
+                IsPullToRefreshEnabled="True"
+                Refreshing="venueListView_Refreshing"
+                SelectedItem="{Binding Venue, Mode=TwoWay}">
+                <!--
+                    RefreshCommand="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRefreshing}"
+                -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label FontAttributes="Bold" Text="{Binding name}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Text="{Binding location.address}"
+                                    TextColor="DodgerBlue" />
+                                <Label Grid.Column="1" Text="{Binding location.distance, StringFormat='{0} meters'}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

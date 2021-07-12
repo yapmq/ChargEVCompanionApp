@@ -13,9 +13,9 @@
     <ContentPage.Content>
         <StackLayout Padding="20">
             <Label Style="{StaticResource LabelMedium}" Text="Name:" />
-            <Entry Text="{Binding NewsTitle}"/>
+            <Entry Text="{Binding NewsTitle}" />
             <Label Style="{StaticResource LabelMedium}" Text="Roaster:" />
-            <Entry Text="{Binding NewsContext}"/>
+            <Entry Text="{Binding NewsContext}" />
 
             <ActivityIndicator
                 HorizontalOptions="Center"

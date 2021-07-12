@@ -36,7 +36,7 @@ namespace ChargEVCompanionApp.ViewModels
             await Task.Delay(2000);
 
             NewsList.Clear();
-            var news = await DatabaseHandler.GetNews();
+            var news = await NewsService.GetNews();
             NewsList.AddRange(news);
 
             IsBusy = false;
