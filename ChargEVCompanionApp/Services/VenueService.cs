@@ -38,6 +38,14 @@ namespace ChargEVCompanionApp.Services
 
             return venues;
         }
+
+        //get saved stations
+        public static async Task<List<ChargingStations>> Read()
+        {
+            var posts = await App.MobileService.GetTable<ChargingStations>().ToListAsync();
+
+            return posts;
+        }
     }
 }
 

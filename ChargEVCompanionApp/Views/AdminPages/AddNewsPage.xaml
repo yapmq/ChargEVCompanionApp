@@ -12,9 +12,9 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <Label Style="{StaticResource LabelMedium}" Text="Name:" />
+            <Label Style="{StaticResource LabelMedium}" Text="Title:" />
             <Entry Text="{Binding NewsTitle}" />
-            <Label Style="{StaticResource LabelMedium}" Text="Roaster:" />
+            <Label Style="{StaticResource LabelMedium}" Text="Context:" />
             <Entry Text="{Binding NewsContext}" />
 
             <ActivityIndicator

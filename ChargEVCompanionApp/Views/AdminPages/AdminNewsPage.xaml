@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.AdminPages.AdminNewsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="viewmodels:AdminNewsPageViewModel"
+    Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AdminNewsPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="AddToolBarrItem"
+            Command="{Binding AddCommand}"
+            Text="Add" />
+    </ContentPage.ToolbarItems>
+
+    <ListView
+        x:Name="NewsList"
+        CachingStrategy="RecycleElement"
+        IsPullToRefreshEnabled="True"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemSelected="NewsList_ItemSelected"
+        ItemsSource="{Binding NewsList}"
+        RefreshCommand="{Binding RefreshCommand}"
+        SelectionMode="Single">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:News">
+                <TextCell Detail="{Binding createdAt, StringFormat='{0:MM/dd/yyyy}'}" Text="{Binding Title}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>

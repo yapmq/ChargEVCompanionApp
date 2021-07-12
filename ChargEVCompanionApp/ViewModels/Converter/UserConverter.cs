@@ -16,7 +16,7 @@ namespace ChargEVCompanionApp.ViewModels.Converter
                 string email = values[0].ToString();
                 string password = values[1].ToString();
 
-                return new Users { Email = email, Password = password, Role = "User" };
+                return new Users { Email = email, Password = password, Role = "User", IsActive = false };
             }
             return null;
         }

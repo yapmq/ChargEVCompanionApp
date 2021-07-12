@@ -18,7 +18,7 @@ namespace ChargEVCompanionApp.Models
         [Column("context")]
         public string Context { get; set; }
 
-        [Column("dateCreated")]
-        public DateTime DateCreated { get; set; }
+        [Column("createdAt")]
+        public DateTimeOffset createdAt { get; set; }
     }
 }

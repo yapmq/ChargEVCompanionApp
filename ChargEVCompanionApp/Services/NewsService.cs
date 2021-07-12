@@ -6,62 +6,55 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.Services
 {
     class NewsService
     {
-        static SQLiteAsyncConnection db;
-        static async Task Init()
-        {
-            if (db != null)
-                return;
+        //static SQLiteAsyncConnection db;
+        //static async Task Init()
+        //{
+        //    if (db != null)
+        //        return;
 
-            // Get an absolute path to the database file
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData.db");
+        //    // Get an absolute path to the database file
+        //    var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData.db");
 
-            db = new SQLiteAsyncConnection(databasePath);
+        //    db = new SQLiteAsyncConnection(databasePath);
 
-            await db.CreateTableAsync<News>();
+        //    await db.CreateTableAsync<News>();
 
-        }
+        //}
 
         public static async Task AddNews(string title, string context)
         {
-            await Init();
-            //var image = "https://www.yesplz.coffee/app/uploads/2020/11/emptybag-min.png";
-            var datecreated = DateTime.Now;
             var news = new News
             {
                 Title = title,
                 Context = context,
-                DateCreated = datecreated
             };
 
-            var id = await db.InsertAsync(news);
+            await App.MobileService.GetTable<News>().InsertAsync(news);
+
         }
 
-        //public static async Task RemoveCoffee(int id)
-        //{
+        public static async Task UpdateNews(string title, string context)
+        {
+            var news = new News
+            {
+                Title = title,
+                Context = context,
+            };
 
-        //    await Init();
-
-        //    await db.DeleteAsync<Coffee>(id);
-        //}
-
-        //public static async Task<IEnumerable<Coffee>> GetCoffee()
-        //{
-        //    await Init();
-
-        //    var coffee = await db.Table<Coffee>().ToListAsync();
-        //    return coffee;
-        //}
+            await App.MobileService.GetTable<News>().UpdateAsync(news);
+        }
 
         public static async Task<IEnumerable<News>> GetNews()
         {
-            await Init();
+            //await Init();
 
-            var news = await db.Table<News>().ToListAsync();
+            var news = await App.MobileService.GetTable<News>().ToListAsync();
 
             return news;
         }

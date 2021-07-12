@@ -3,10 +3,10 @@
     x:Class="ChargEVCompanionApp.Views.RegisterUserPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:converters="clr-namespace:ChargEVCompanionApp.ViewModels.Converter"
     xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
-    x:DataType="viewmodel:RegisterUserViewModel"
-    xmlns:converters="clr-namespace:ChargEVCompanionApp.ViewModels.Converter">
+    xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
+    x:DataType="viewmodel:RegisterUserViewModel">
 
     <ContentPage.BindingContext>
         <viewmodel:RegisterUserViewModel />
@@ -14,7 +14,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:UserConverter x:Key="converter"/>
+            <converters:UserConverter x:Key="converter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -44,17 +44,20 @@
         <Button
             x:Name="registerButton"
             Margin="0,50,0,0"
-            BackgroundColor="Blue"      
+            BackgroundColor="Blue"
             Command="{Binding RegisterCommand}"
             Text="Register"
             TextColor="White">
             <Button.CommandParameter>
-                <MultiBinding x:DataType="{x:Type model:Users}"
-                              Converter="{StaticResource converter}">
+                <MultiBinding Converter="{StaticResource converter}">
                     <MultiBinding.Bindings>
-                        <Binding Path="Email"/>
-                        <Binding Path="Password"/>
-                    </MultiBinding.Bindings>                    
+                        <Binding 
+                            Source="{x:Reference emailEntry}"
+                            Path="Text" />
+                        <Binding 
+                            Source="{x:Reference PasswordEntry}"
+                            Path="Text" />
+                    </MultiBinding.Bindings>
                 </MultiBinding>
             </Button.CommandParameter>
         </Button>
@@ -62,5 +65,7 @@
 
 </ContentPage>
 
-<!--Command="{Binding RegisterCommand}"
-            CommandParameter="{Binding User}"-->
+<!--
+    Command="{Binding RegisterCommand}"
+    CommandParameter="{Binding User}"
+-->

@@ -2,7 +2,8 @@
 <ContentPage
     x:Class="ChargEVCompanionApp.Views.AdminPages.AddStationDetailsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.PresentationMode="Modal">
 
     <StackLayout Margin="16,20,16,0" CompressedLayout.IsHeadless="True">
         <Grid>
@@ -69,7 +70,8 @@
                 Grid.ColumnSpan="2"
                 FontSize="15"
                 MaxLength="4"
-                Placeholder="Activation Code" />
+                Keyboard="Numeric"
+                Placeholder="4-digit Activation Code" />
             <Button
                 x:Name="activeButton"
                 Grid.Row="5"

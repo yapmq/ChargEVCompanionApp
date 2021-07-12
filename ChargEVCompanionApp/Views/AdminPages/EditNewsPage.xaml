@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.AdminPages.EditNewsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="Edit">
+
+
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <StackLayout Margin="15">
+                <Label Style="{StaticResource LabelMedium}" Text="Title:"/>
+                <Entry x:Name="TitleEntry" Placeholder="Title"/>
+                <Label Style="{StaticResource LabelMedium}" Text="Context:" />
+                <Entry x:Name="ContextEntry" Placeholder="Context"/>
+            </StackLayout>
+
+            <Button
+                x:Name="UpdateButton"
+                Padding="20,0"
+                Clicked="UpdateButton_Clicked"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonOutline}"
+                Text="Update"
+                VerticalOptions="Center" />
+
+            <Button
+                x:Name="DeleteButton"
+                Padding="20,0"
+                Clicked="DeleteButton_Clicked"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonOutline}"
+                Text="Delete"
+                VerticalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,63 +1,87 @@
 ﻿using ChargEVCompanionApp.Models;
+using ChargEVCompanionApp.Services;
+using ChargEVCompanionApp.Views.UserPages;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
 
-        private string email;
+        private string email = string.Empty;
 
-        public string Email { get => email; set => SetProperty(ref email, value); }
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                email = value;
+                User = new Users()
+                {
+                    Email = this.Email,
+                    Password = this.Password
+                };
+                OnPropertyChanged();
+            }
+        }
+
+        private string password = string.Empty;
+
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                password = value;
+                User = new Users()
+                {
+                    Email = this.Email,
+                    Password = this.Password
+                };
+                OnPropertyChanged();
+            }
+        }
 
         private Users user;
 
         public Users User { get => user; set => SetProperty(ref user, value); }
 
-        private Command loginCommand;
 
-        public ICommand LoginCommand
+        public AsyncCommand LoginCommand { get; private set; }
+
+
+        public LoginPageViewModel()
         {
-            get
-            {
-                if (loginCommand == null)
-                {
-                    loginCommand = new Command(Login);
-                }
+            User = new Users();
+            LoginCommand = new AsyncCommand(Login);
+        }
 
-                return loginCommand;
+        public async Task Login()
+        {
+            if (user != null)
+            {
+                if (!string.IsNullOrWhiteSpace(User.Email) && !string.IsNullOrWhiteSpace(User.Password))
+                {
+                    await UserService.ValidateLogin(User.Email, User.Password);
+
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "Empty fields!", "OK");
+                }
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Empty fields!", "OK");
             }
         }
 
-        private void Login()
-        {
-        }
 
-        private Command registerNavigationCommand;
-
-        public ICommand RegisterNavigationCommand
-        {
-            get
-            {
-                if (registerNavigationCommand == null)
-                {
-                    registerNavigationCommand = new Command(RegisterNavigation);
-                }
-
-                return registerNavigationCommand;
-            }
-        }
-
-        private void RegisterNavigation()
-        {
-        }
-
-        private string password;
-
-        public string Password { get => password; set => SetProperty(ref password, value); }
     }
 }

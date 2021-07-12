@@ -1,4 +1,6 @@
-﻿using Plugin.Geolocator;
+﻿using ChargEVCompanionApp.Models;
+using ChargEVCompanionApp.Services;
+using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -66,10 +68,43 @@ namespace ChargEVCompanionApp.Views.UserPages
                 var locator = CrossGeolocator.Current;
 
                 locator.PositionChanged += Locator_PositionChanged;
-                await locator.StartListeningAsync(TimeSpan.Zero, 100);
+                await locator.StartListeningAsync(TimeSpan.Zero, 500);
             }
             GetLocation();
+
+            var stations = await VenueService.Read();
+            DisplayInMap(stations);
         }
+
+        private async void DisplayInMap(List<ChargingStations> stations)
+        {
+            foreach (var station in stations)
+            {
+                try
+                {
+                    var position = new Xamarin.Forms.Maps.Position(station.Latitude, station.Longtitude);
+
+                    var pin = new Xamarin.Forms.Maps.Pin()
+                    {
+                        Type = Xamarin.Forms.Maps.PinType.SavedPin,
+                        Position = position,
+                        Label = station.VenueName,
+                        Address = station.Address
+                    };
+
+                    LocationMap.Pins.Add(pin);
+                }
+                catch (NullReferenceException nre)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Null Reference", "Ok");
+                }
+                catch (Exception ex)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Exception", "Ok");
+                }
+            }
+        }
+
 
         private void MoveMap(Position position)
         {

@@ -33,6 +33,8 @@ namespace ChargEVCompanionApp.Views.AdminPages
                 Navigation.PushModalAsync(new AddStationDetailsPage(selectedVenue));
             }
 
+            venueListView.SelectedItem = null;
+
         }
 
         //protected override async void OnAppearing()

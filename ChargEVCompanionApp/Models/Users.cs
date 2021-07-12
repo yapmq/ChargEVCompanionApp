@@ -20,5 +20,8 @@ namespace ChargEVCompanionApp.Models
 
         [Column("role")]
         public string Role { get; set; }
+
+        [Column("isActive")]
+        public bool IsActive { get; set; }
     }
 }

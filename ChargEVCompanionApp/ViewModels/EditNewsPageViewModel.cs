@@ -5,18 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.ViewModels
 {
-    public class AddNewsPageViewModel : ViewModelBase
+    class EditNewsPageViewModel : ViewModelBase
     {
-        public AsyncCommand SaveCommand { get; }
-        public AddNewsPageViewModel()
+        public AsyncCommand UpdateCommand { get; }
+        public AsyncCommand DeleteCommand { get; }
+        public EditNewsPageViewModel()
         {
-            Title = "Add News Page";
-            SaveCommand = new AsyncCommand(Save);
+            Title = "Edit News";
+            UpdateCommand = new AsyncCommand(Update);
+            DeleteCommand = new AsyncCommand(Delete);
         }
 
         private string newsTitle, newsContext;
@@ -26,7 +27,7 @@ namespace ChargEVCompanionApp.ViewModels
 
 
 
-        async Task Save()
+        async Task Update()
         {
             if (string.IsNullOrEmpty(newsContext) || (string.IsNullOrEmpty(newsTitle)))
             {
@@ -35,14 +36,23 @@ namespace ChargEVCompanionApp.ViewModels
             }
             else
             {
-                await NewsService.AddNews(newsTitle, newsContext);
+                await NewsService.UpdateNews(newsTitle, newsContext);
 
-                await Shell.Current.DisplayAlert("Success", "data added", "ok");
+                await Shell.Current.DisplayAlert("Success", "Data updated", "ok");
 
                 //var route = nameof(NewsPage);
-                await Shell.Current.GoToAsync($"{nameof(NewsPage)}");
+                await Shell.Current.GoToAsync("..");
             }
         }
 
+        async Task Delete()
+        {
+            await NewsService.UpdateNews(newsTitle, newsContext);
+
+            await Shell.Current.DisplayAlert("Success", "Data updated", "ok");
+
+            //var route = nameof(NewsPage);
+            await Shell.Current.GoToAsync("..");
+        }
     }
 }

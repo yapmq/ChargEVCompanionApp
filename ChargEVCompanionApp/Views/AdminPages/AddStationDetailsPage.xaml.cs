@@ -1,4 +1,5 @@
 ﻿using ChargEVCompanionApp.Models;
+using Microsoft.WindowsAzure.MobileServices;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace ChargEVCompanionApp.Views.AdminPages
 
         }
 
-        private void activeButton_Clicked(object sender, EventArgs e)
+        private async void activeButton_Clicked(object sender, EventArgs e)
         {
             double latitude = double.Parse(latitudeEntry.Text);
             double longtitude = double.Parse(longtitudeEntry.Text);
@@ -43,6 +44,10 @@ namespace ChargEVCompanionApp.Views.AdminPages
                 Code = code,
                 IsActive = true
             };
+
+            await App.MobileService.GetTable<ChargingStations>().InsertAsync(station);
+            await Shell.Current.DisplayAlert("Success!", "New Station Added", "OK");
+            await Navigation.PopModalAsync();
 
             //using (SQLiteConnection conn = new SQLiteConnection(App.))
             //{

@@ -4,41 +4,41 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
-    x:DataType="viewmodel:LoginPageViewModel">
+    x:DataType="viewmodel:LoginPageViewModel"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <viewmodel:LoginPageViewModel/>
+    </ContentPage.BindingContext>
 
     <StackLayout
         Margin="25"
         CompressedLayout.IsHeadless="True"
         VerticalOptions="Center">
-        <Image
-            x:Name="iconImage"
-            Margin="0,0,0,50"
-            Aspect="AspectFit"
-            HeightRequest="150"
-            HorizontalOptions="FillAndExpand" />
         <Entry
             x:Name="emailEntry"
             Keyboard="Email"
             Placeholder="Email address"
             Text="{Binding Email, Mode=TwoWay}"
-            TextColor="{StaticResource BlueColor}" />
+            TextColor="Blue" />
         <Entry
             x:Name="PasswordEntry"
             IsPassword="True"
             Placeholder="Password"
             Text="{Binding Password, Mode=TwoWay}"
-            TextColor="{StaticResource BlueColor}" />
+            TextColor="Blue" />
         <Button
             x:Name="LoginButton"
             Margin="0,50,0,0"
-            BackgroundColor="{StaticResource BlueColor}"
+            BackgroundColor="Blue"
             Command="{Binding LoginCommand}"
             CommandParameter="{Binding User}"
             Text="Log in"
             TextColor="White" />
         <Button
             x:Name="registerUserButton"
-            Command="{Binding RegisterNavigationCommand}"
+            Clicked="registerUserButton_Clicked"
             HorizontalOptions="End"
             Text="Register" />
     </StackLayout>

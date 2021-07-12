@@ -14,20 +14,20 @@ namespace ChargEVCompanionApp.ViewModels
     public class RegisterUserViewModel : ViewModelBase
     {
 
-        private string email;
+        private string email = string.Empty;
 
         public string Email { get => email; set => SetProperty(ref email, value); }
 
-        private string password;
+        private string password = string.Empty;
 
         public string Password { get => password; set => SetProperty(ref password, value); }
 
-        private string confirmPassword;
+        private string confirmPassword = string.Empty;
 
         public string ConfirmPassword { get => confirmPassword; set => SetProperty(ref confirmPassword, value); }
 
         public Command RegisterCommand { get; private set; }
-
+        //public Command<Users> RegisterCommand { get; private set; }
 
         public RegisterUserViewModel()
         {
@@ -37,39 +37,35 @@ namespace ChargEVCompanionApp.ViewModels
 
         private async void Register(object parameter)
         {
-            try
-            {
-                Users input = (Users)parameter;
+            Users input = (Users)parameter;
+            string pw = input.Password;
+            string confirmpw = confirmPassword;
 
-                if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(confirmPassword))
+
+            if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(confirmPassword))
+            {
+                bool passwordmatch = CheckPassword(pw, confirmpw);
+                if (passwordmatch)
                 {
-                    if (password == confirmPassword)
+                    bool canRegister = await CheckRegister(input);
+                    if (canRegister)
                     {
-                        //bool canRegister = await CheckRegister(input);
-                        if (await CheckRegister(input))
-                        {
-                            await UserService.RegisterUser(input);
-                        }
-                        else
-                        {
-                            await Shell.Current.DisplayAlert("Error", "Record exists! Please login", "OK");
-                        }
+                        await UserService.RegisterUser(input);
+                        await App.Current.MainPage.DisplayAlert("Registration requested", "Please wait for approval", "OK");
                     }
                     else
                     {
-                        await Shell.Current.DisplayAlert("Error", "Password not matched", "OK");
+                        await App.Current.MainPage.DisplayAlert("Error", "Record exists! Please login", "OK"); //change to shell
                     }
-
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Empty Fields", "OK");
+                    await App.Current.MainPage.DisplayAlert("Error", "Password not matched", "OK");//change to shell
                 }
             }
-            catch (Exception ex)
+            else
             {
-
-                await Shell.Current.DisplayAlert("Error", ex.ToString(), "OK");
+                await App.Current.MainPage.DisplayAlert("Error", "Empty fields", "OK");//change to shell
             }
         }
 
@@ -89,56 +85,25 @@ namespace ChargEVCompanionApp.ViewModels
             }
 
         }
-        //private Command registerCommand;
 
-        //public ICommand RegisterCommand
-        //{
-        //    get
-        //    {
-        //        if (registerCommand == null)
-        //        {
-        //            registerCommand = new Command(Register);
-        //        }
+        public bool CheckPassword(string pw, string confirmpw)
+        {
+            if (!string.IsNullOrWhiteSpace(pw) && !string.IsNullOrEmpty(confirmpw))
+            {
+                if (pw == confirmpw)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
 
-        //        return registerCommand;
-        //    }
-        //}
-
-        //public Command RegisterCommand { get; }
-
-        // private void Register(object parameter)
-        //{
-        //    
-        //}
-
-
-        ////public ICommand RegisterCommand
-        ////{
-        ////    get
-        ////    {
-        ////        if (registerCommand == null)
-        ////        {
-        ////            registerCommand = new Command(Register);
-        ////        }
-
-        ////        return registerCommand;
-        ////    }
-        ////}
-
-        //async Task Register()
-        //{
-        //    if(!string.IsNullOrWhiteSpace(user.email) && !string.IsNullOrWhiteSpace(user.password) && !string.IsNullOrWhiteSpace(user.confirmPassword))
-        //    {
-        //        if (user.password == user.confirmPassword)
-        //        {
-        //            await CheckRegister(user);
-        //        }
-        //        else
-        //        {
-        //            await Shell.Current.DisplayAlert("Error", "Password not matched", "OK");
-        //        }
-
-        //    }
-        //}
+        }
     }
 }

@@ -7,26 +7,25 @@
     xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
     xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:DataType="viewmodels:NewsPageViewModel">
+    x:DataType="viewmodels:NewsPageViewModel"
+    Title="{Binding Title}">
 
     <ContentPage.BindingContext>
         <viewmodels:NewsPageViewModel />
     </ContentPage.BindingContext>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding AddCommand}" Text="Add" />
-    </ContentPage.ToolbarItems>
-
     <ListView
+        x:Name="NewsList"
         CachingStrategy="RecycleElement"
-        ItemsSource="{Binding NewsList}"
-        SelectionMode="Single"
         IsPullToRefreshEnabled="True"
         IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-        RefreshCommand="{Binding RefreshCommand}">
+        ItemSelected="ListView_ItemSelected"
+        ItemsSource="{Binding NewsList}"
+        RefreshCommand="{Binding RefreshCommand}"
+        SelectionMode="Single">
         <ListView.ItemTemplate>
-            <DataTemplate x:DataType ="model:News">
-                <TextCell Detail="{Binding Context}" Text="{Binding Title}" />
+            <DataTemplate x:DataType="model:News">
+                <TextCell Detail="{Binding createdAt, StringFormat='{0:MM/dd/yyyy}'}" Text="{Binding Title}" />
             </DataTemplate>
         </ListView.ItemTemplate>
         <!--<ListView.ItemTemplate>
