@@ -1,17 +1,41 @@
-﻿using ChargEVCompanionApp.Views.AdminPages;
+﻿using ChargEVCompanionApp.Models;
+using ChargEVCompanionApp.Views;
+using ChargEVCompanionApp.Views.AdminPages;
 using ChargEVCompanionApp.Views.UserPages;
+using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 using Xamarin.Forms;
 
 namespace ChargEVCompanionApp
 {
     public partial class App : Application
     {
+        public static string DatabaseLocation;//
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://chargevcompanionapp.azurewebsites.net");
 
+        public static IMobileServiceSyncTable<ChargingStations> chargingstations; //
         public App()
         {
             InitializeComponent();
 
-            MainPage = new AddStationPage();
+            //MainPage = new RegisterUserPage();
+        }
+
+        public App(string databaseLocation) ////
+        {
+            InitializeComponent();
+
+            MainPage = new RegisterUserPage();
+
+            DatabaseLocation = databaseLocation;
+
+            var store = new MobileServiceSQLiteStore(databaseLocation);
+            store.DefineTable<ChargingStations>();
+
+            MobileService.SyncContext.InitializeAsync(store);
+
+            chargingstations = MobileService.GetSyncTable<ChargingStations>();
         }
 
         protected override void OnStart()

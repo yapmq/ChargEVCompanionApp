@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.AdminPages.AddStationDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <StackLayout Margin="16,20,16,0" CompressedLayout.IsHeadless="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Entry
+                x:Name="venueEntry"
+                Grid.ColumnSpan="2"
+                Margin="0,30,0,0"
+                FontAttributes="Bold"
+                FontSize="22"
+                Placeholder="Venue name" />
+            <Entry
+                x:Name="addressEntry"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                FontSize="15"
+                HorizontalOptions="Fill"
+                Placeholder="Address"
+                VerticalOptions="Start" />
+            <Entry
+                x:Name="latitudeEntry"
+                Grid.Row="2"
+                FontSize="15"
+                Keyboard="Numeric"
+                Text="123.12" />
+            <Entry
+                x:Name="longtitudeEntry"
+                Grid.Row="2"
+                Grid.Column="1"
+                FontSize="15"
+                Keyboard="Numeric"
+                Placeholder="Longtitude" />
+            <Picker
+                x:Name="StationTypePicker"
+                Title="Select Charger Type"
+                Grid.Row="3">
+                <Picker.Items>
+                    <x:String>AC 3.7kW</x:String>
+                    <x:String>AC 7.0kW</x:String>
+                    <x:String>AC 22.0kW</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry
+                x:Name="stationNameEntry"
+                Grid.Row="3"
+                Grid.Column="1"
+                FontSize="15"
+                Placeholder="Station Name" />
+            <Entry
+                x:Name="codeEntry"
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                FontSize="15"
+                MaxLength="4"
+                Placeholder="Activation Code" />
+            <Button
+                x:Name="activeButton"
+                Grid.Row="5"
+                Clicked="activeButton_Clicked"
+                Text="Activate" />
+            <Button
+                x:Name="cancelButton"
+                Grid.Row="5"
+                Grid.Column="1"
+                Clicked="cancelButton_Clicked"
+                Text="Cancel" />
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

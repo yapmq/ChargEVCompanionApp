@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.RegisterUserPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    x:DataType="viewmodel:RegisterUserViewModel"
+    xmlns:converters="clr-namespace:ChargEVCompanionApp.ViewModels.Converter">
+
+    <ContentPage.BindingContext>
+        <viewmodel:RegisterUserViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:UserConverter x:Key="converter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout
+        x:Name="containersStackLayout"
+        Margin="25,25,25,25"
+        CompressedLayout.IsHeadless="True"
+        VerticalOptions="Center">
+        <Entry
+            x:Name="emailEntry"
+            Keyboard="Email"
+            Placeholder="Email address"
+            Text="{Binding Email, Mode=TwoWay}"
+            TextColor="Blue" />
+        <Entry
+            x:Name="PasswordEntry"
+            IsPassword="True"
+            Placeholder="Password"
+            Text="{Binding Password, Mode=TwoWay}"
+            TextColor="Blue" />
+        <Entry
+            x:Name="confirmPasswordEntry"
+            IsPassword="True"
+            Placeholder="Confirm password"
+            Text="{Binding ConfirmPassword, Mode=TwoWay}"
+            TextColor="Blue" />
+        <Button
+            x:Name="registerButton"
+            Margin="0,50,0,0"
+            BackgroundColor="Blue"      
+            Command="{Binding RegisterCommand}"
+            Text="Register"
+            TextColor="White">
+            <Button.CommandParameter>
+                <MultiBinding x:DataType="{x:Type model:Users}"
+                              Converter="{StaticResource converter}">
+                    <MultiBinding.Bindings>
+                        <Binding Path="Email"/>
+                        <Binding Path="Password"/>
+                    </MultiBinding.Bindings>                    
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </StackLayout>
+
+</ContentPage>
+
+<!--Command="{Binding RegisterCommand}"
+            CommandParameter="{Binding User}"-->

@@ -10,7 +10,7 @@ namespace ChargEVCompanionApp.Models
     {
         [PrimaryKey, AutoIncrement]
         [Column("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Column("title")]
         public string Title { get; set; }

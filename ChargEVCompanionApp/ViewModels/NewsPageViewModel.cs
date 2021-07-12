@@ -18,16 +18,23 @@ namespace ChargEVCompanionApp.ViewModels
     {
         public ObservableRangeCollection<News> NewsList { get; set; }
         public AsyncCommand RefreshCommand { get; }
+        public AsyncCommand AddCommand { get; }
         public NewsPageViewModel()
         {
             Title = "News and Media";
             NewsList = new ObservableRangeCollection<News>();
             //NewsList.Add(new News { Title = "hello world", Context = "testing123", DateCreated = DateTime.Today });
-            
+
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
-            Refresh();
+            Initialize();
         }
+
+        public async void Initialize()
+        {
+            await Refresh();
+        }
+
 
         async Task Refresh()
         {
@@ -42,9 +49,7 @@ namespace ChargEVCompanionApp.ViewModels
             IsBusy = false;
         }
 
-
-        public AsyncCommand AddCommand { get; }
-
+        
         async Task Add()
         {
             var route = nameof(AddNewsPage);

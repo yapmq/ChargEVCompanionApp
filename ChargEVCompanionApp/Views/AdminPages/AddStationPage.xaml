@@ -4,8 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
-    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
-    x:DataType="viewmodels:AddStationViewModel">
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels">
 
     <ContentPage.BindingContext>
         <viewmodels:AddStationViewModel />
@@ -16,19 +15,19 @@
             <SearchBar
                 x:Name="LocationSearch"
                 Placeholder="Search location"
-                TextChanged="LocationSearch_TextChanged" />
+                SearchCommand="{Binding PerformSearch}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference LocationSearch}}" />
 
             <ListView
                 x:Name="venueListView"
                 Margin="20,0"
                 HorizontalOptions="FillAndExpand"
                 IsPullToRefreshEnabled="True"
-                Refreshing="venueListView_Refreshing"
-                SelectedItem="{Binding Venue, Mode=TwoWay}">
-                <!--
-                    RefreshCommand="{Binding RefreshCommand}"
-                    IsRefreshing="{Binding IsRefreshing}"
-                -->
+                ItemsSource="{Binding SearchResults}"
+                SelectedItem="{Binding Venue, Mode=TwoWay}"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                RefreshCommand="{Binding RefreshCommand}"
+                ItemSelected="venueListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

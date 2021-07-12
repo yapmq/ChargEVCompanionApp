@@ -1,10 +1,14 @@
 ﻿using ChargEVCompanionApp.Models;
+using ChargEVCompanionApp.Services;
+using MvvmHelpers.Commands;
 using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Command = MvvmHelpers.Commands.Command;
 
 namespace ChargEVCompanionApp.ViewModels
 {
@@ -14,36 +18,53 @@ namespace ChargEVCompanionApp.ViewModels
         private Venue venue;
 
         public Venue Venue { get => venue; set => SetProperty(ref venue, value); }
+        
 
-        //private Command refreshCommand;
+        public List<Venue> searchResults = new List<Venue>();
+        public List<Venue> SearchResults
+        {
+            get
+            {
+                return searchResults;
+            }
+            set
+            {
+                searchResults = value;
+                OnPropertyChanged();
+            }
+        }
 
-        //public ICommand RefreshCommand
-        //{
-        //    get
-        //    {
-        //        if (refreshCommand == null)
-        //        {
-        //            refreshCommand = new Command(Refresh);
-        //        }
+        public ICommand PerformSearch => new Xamarin.Forms.Command<string>(async (string query) =>
+        {
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync();
+            SearchResults = await VenueService.GetVenues(position.Latitude, position.Longitude, query);
+        });
 
-        //        return refreshCommand;
-        //    }
-        //}
+        public AddStationViewModel()
+        {
+            SearchResults = new List<Venue>();
+            RefreshCommand = new AsyncCommand(Refresh);
 
-        //private async void Refresh()
-        //{
-        //    venueListView.ItemsSource = null;
+            Initialize();
+        }
 
-        //    var updLocator = CrossGeolocator.Current;
-        //    var updPosition = await updLocator.GetPositionAsync();
-        //    var updVenues = await VenueService.GetVenues(updPosition.Latitude, updPosition.Longitude);
+        public async void Initialize()
+        {
+            await Refresh();
+        }
 
-        //    venueListView.ItemsSource = updVenues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
-        //    venueListView.IsRefreshing = false;
-        //}
+        public AsyncCommand RefreshCommand { get; }
 
-        //private bool isRefreshing;
+        async Task Refresh()
+        {
+            IsBusy = true;
+            await Task.Delay(2000);
+            var updLocator = CrossGeolocator.Current;
+            var updPosition = await updLocator.GetPositionAsync();
+            SearchResults = await VenueService.GetVenues(updPosition.Latitude, updPosition.Longitude, "");
+            IsBusy = false;
+        }
 
-        //public bool IsRefreshing { get => isRefreshing; set => SetProperty(ref isRefreshing, value); }
     }
 }

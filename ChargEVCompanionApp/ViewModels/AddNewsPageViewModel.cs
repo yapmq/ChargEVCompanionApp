@@ -30,6 +30,7 @@ namespace ChargEVCompanionApp.ViewModels
         {
             if (string.IsNullOrEmpty(newsContext) || (string.IsNullOrEmpty(newsTitle)))
             {
+                await Shell.Current.DisplayAlert("Success", "Fields are empty!", "ok");
                 return;
             }
             else
