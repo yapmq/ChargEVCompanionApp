@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="ChargEVCompanionApp.Views.AdminPages.AdminNewsPage"
+    x:Class="ChargEVCompanionApp.Views.AdminPages.AdminFAQPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
@@ -8,10 +8,10 @@
     xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{Binding Title}"
-    x:DataType="viewmodels:AdminNewsPageViewModel">
+    x:DataType="viewmodels:AdminFAQViewModel">
 
     <ContentPage.BindingContext>
-        <viewmodels:AdminNewsPageViewModel />
+        <viewmodels:AdminFAQViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
@@ -22,19 +22,18 @@
     </ContentPage.ToolbarItems>
 
     <ListView
-        x:Name="NewsList"
+        x:Name="QuestionList"
         CachingStrategy="RecycleElement"
         IsPullToRefreshEnabled="True"
         IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-        ItemSelected="NewsList_ItemSelected"
-        ItemsSource="{Binding NewsList}"
+        ItemSelected="QuestionList_ItemSelected"
+        ItemsSource="{Binding QuestionList}"
         RefreshCommand="{Binding RefreshCommand}"
         SelectionMode="Single">
         <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:News">
-                <TextCell Detail="{Binding createdAt, StringFormat='{0:MM/dd/yyyy}'}" Text="{Binding Title}" />
+            <DataTemplate x:DataType="model:Questions">
+                <TextCell Detail="{Binding createdAt, StringFormat='{0:MM/dd/yyyy}'}" Text="{Binding Question}" />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-
 </ContentPage>

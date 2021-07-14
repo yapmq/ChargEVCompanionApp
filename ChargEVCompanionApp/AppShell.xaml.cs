@@ -13,14 +13,14 @@ namespace ChargEVCompanionApp
         {
             InitializeComponent();
 
-
             Routing.RegisterRoute(nameof(AddNewsPage),
                 typeof(AddNewsPage));
 
             Routing.RegisterRoute(nameof(RegisterUserPage),
                 typeof(RegisterUserPage));
 
-
+            Routing.RegisterRoute(nameof(NewFAQPage),
+                typeof(NewFAQPage));
         }
 
     }

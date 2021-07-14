@@ -27,12 +27,19 @@ namespace ChargEVCompanionApp.Views.AdminPages
 
         private async void UpdateButton_Clicked(object sender, EventArgs e)
         {
-            selectedNews.Title = TitleEntry.Text;
-            selectedNews.Context = ContextEntry.Text;
+            if (!string.IsNullOrWhiteSpace(TitleEntry.Text) && !string.IsNullOrWhiteSpace(ContextEntry.Text))
+            {
+                selectedNews.Title = TitleEntry.Text;
+                selectedNews.Context = ContextEntry.Text;
 
-            await App.MobileService.GetTable<News>().UpdateAsync(selectedNews);
-            await DisplayAlert("Success", "News added", "Ok");
-            await Navigation.PopModalAsync();
+                await App.MobileService.GetTable<News>().UpdateAsync(selectedNews);
+                await DisplayAlert("Success", "News added", "Ok");
+                await Navigation.PopModalAsync();
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Empty fields!", "OK");
+            }
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)

@@ -30,24 +30,41 @@ namespace ChargEVCompanionApp.Views.AdminPages
 
         private async void activeButton_Clicked(object sender, EventArgs e)
         {
-            double latitude = double.Parse(latitudeEntry.Text);
-            double longtitude = double.Parse(longtitudeEntry.Text);
-            int code = int.Parse(codeEntry.Text);
-            ChargingStations station = new ChargingStations()
+            if (!string.IsNullOrWhiteSpace(codeEntry.Text) && !string.IsNullOrWhiteSpace(latitudeEntry.Text) && !string.IsNullOrWhiteSpace(longtitudeEntry.Text) && !string.IsNullOrWhiteSpace(venueEntry.Text) && !string.IsNullOrWhiteSpace(stationNameEntry.Text))
             {
-                VenueName = venueEntry.Text,
-                Address = addressEntry.Text,
-                Latitude = latitude,
-                Longtitude = longtitude,
-                StationName = stationNameEntry.Text,
-                StationType = StationTypePicker.SelectedItem.ToString(),
-                Code = code,
-                IsActive = true
-            };
+                int code = int.Parse(codeEntry.Text);
+                double latitude = double.Parse(latitudeEntry.Text);
+                double longtitude = double.Parse(longtitudeEntry.Text);
 
-            await App.MobileService.GetTable<ChargingStations>().InsertAsync(station);
-            await Shell.Current.DisplayAlert("Success!", "New Station Added", "OK");
-            await Navigation.PopModalAsync();
+                if (StationTypePicker.SelectedIndex != -1)
+                {
+                    ChargingStations station = new ChargingStations()
+                    {
+                        VenueName = venueEntry.Text,
+                        Address = addressEntry.Text,
+                        Latitude = latitude,
+                        Longtitude = longtitude,
+                        StationName = stationNameEntry.Text,
+                        StationType = StationTypePicker.SelectedItem.ToString(),
+                        Code = code,
+                        IsActive = true
+                    };
+
+                    await App.MobileService.GetTable<ChargingStations>().InsertAsync(station);
+                    await Shell.Current.DisplayAlert("Success!", "New Station Added", "OK");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error!", "Please select charger type.", "OK");
+                }
+
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error!", "Empty fields are required.", "OK");
+            }
+
 
             //using (SQLiteConnection conn = new SQLiteConnection(App.))
             //{

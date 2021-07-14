@@ -15,7 +15,7 @@ namespace ChargEVCompanionApp.ViewModels
         public AsyncCommand SaveCommand { get; }
         public AddNewsPageViewModel()
         {
-            Title = "Add News Page";
+            Title = "Add News";
             SaveCommand = new AsyncCommand(Save);
         }
 
@@ -40,7 +40,7 @@ namespace ChargEVCompanionApp.ViewModels
                 await Shell.Current.DisplayAlert("Success", "data added", "ok");
 
                 //var route = nameof(NewsPage);
-                await Shell.Current.GoToAsync($"{nameof(NewsPage)}");
+                await Shell.Current.GoToAsync("..");
             }
         }
 

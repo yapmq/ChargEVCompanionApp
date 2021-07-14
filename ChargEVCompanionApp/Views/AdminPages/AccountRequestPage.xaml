@@ -2,13 +2,59 @@
 <ContentPage
     x:Class="ChargEVCompanionApp.Views.AdminPages.AccountRequestPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="RequestPage"
+    Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AccountRequestViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ListView
+        x:Name="RequestList"
+        CachingStrategy="RecycleElement"
+        HasUnevenRows="True"
+        IsPullToRefreshEnabled="True"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemSelected="RequestList_ItemSelected"
+        ItemsSource="{Binding RequestList}"
+        RefreshCommand="{Binding RefreshCommand}"
+        SelectionMode="Single"
+        Style="{StaticResource StationListView}">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Users">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem
+                            Command="{Binding Source={x:Reference RequestPage}, Path=BindingContext.ApproveCommand}"
+                            CommandParameter="{Binding .}"
+                            Text="Approve" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame Style="{StaticResource Card}">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Center">
+                                    <Label
+                                        Style="{StaticResource LabelLarge}"
+                                        Text="{Binding Email}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Style="{StaticResource LabelLarge}"
+                                        Text="{Binding Role}"
+                                        TextColor="Red"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

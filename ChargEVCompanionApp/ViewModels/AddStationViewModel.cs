@@ -43,6 +43,7 @@ namespace ChargEVCompanionApp.ViewModels
 
         public AddStationViewModel()
         {
+            Title = "Add Station";
             SearchResults = new List<Venue>();
             RefreshCommand = new AsyncCommand(Refresh);
 

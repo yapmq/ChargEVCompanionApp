@@ -67,8 +67,13 @@ namespace ChargEVCompanionApp.Views.UserPages
             {
                 var locator = CrossGeolocator.Current;
 
+
                 locator.PositionChanged += Locator_PositionChanged;
-                await locator.StartListeningAsync(TimeSpan.Zero, 500);
+                if (locator != null && locator.IsListening != true)
+                {
+                    await locator.StartListeningAsync(TimeSpan.FromSeconds(5), 100);
+                }
+
             }
             GetLocation();
 

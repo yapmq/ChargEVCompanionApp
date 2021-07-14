@@ -3,19 +3,27 @@
     x:Class="ChargEVCompanionApp.Views.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ChargEVCompanionApp;assembly=ChargEVCompanionApp"
     xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
     x:DataType="viewmodel:LoginPageViewModel"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
 
     <ContentPage.BindingContext>
-        <viewmodel:LoginPageViewModel/>
+        <viewmodel:LoginPageViewModel />
     </ContentPage.BindingContext>
 
     <StackLayout
         Margin="25"
         CompressedLayout.IsHeadless="True"
         VerticalOptions="Center">
+        <Image
+            x:Name="loginImage"
+            Margin="0,0,0,50"
+            Aspect="AspectFit"
+            HeightRequest="150"
+            HorizontalOptions="FillAndExpand"
+            Source="https://chargev.chargev.my/wp-content/uploads/2019/11/chargev-logo2.png" />
         <Entry
             x:Name="emailEntry"
             Keyboard="Email"

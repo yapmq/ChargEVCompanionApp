@@ -10,7 +10,7 @@
     Title="ChargEVCompanionApp">
 
     <Shell.BindingContext>
-        <viewmodel:AppShellViewModel/>
+        <viewmodel:AppShellViewModel />
     </Shell.BindingContext>
 
     <!--
@@ -96,17 +96,67 @@
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
     </ShellItem>
 
+    <!--<FlyoutItem Title="Browse" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate userviews:NewsPage}" Route="ItemsPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="About" Icon="tab_about.png">
+        <ShellContent ContentTemplate="{DataTemplate userviews:ChargingStationsPage}" Route="main" />
+    </FlyoutItem>
+    <FlyoutItem Title="Admin" Icon="tab_about.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AdminPage" />
+    </FlyoutItem>-->
 
-    <FlyoutItem Title="News" Icon="icon_about.png" IsVisible="{Binding IsAdmin}">
-        <ShellContent ContentTemplate="{DataTemplate userviews:NewsPage}" Route="News" />
+
+    <FlyoutItem Title="News" Icon="icon_feed.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:NewsPage}"
+            IsVisible="{Binding IsUser}"
+            Route="News" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Add Station" Icon="icon_about.png">
-        <ShellContent ContentTemplate="{DataTemplate adminviews:AddStationPage}" Route="AddStationPage" />
+    <FlyoutItem
+        Title="Add Station"
+        x:DataType="viewmodel:AppShellViewModel"
+        Icon="ic_action_ev_station.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AddStationPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AddStationPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Maps" Icon="icon_about.png">
+    <FlyoutItem Title="Maps" Icon="ic_action_map.png">
         <ShellContent ContentTemplate="{DataTemplate userviews:MapPage}" Route="MapPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="News" Icon="icon_feed.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AdminNewsPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AdminNewsPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Account Approval" Icon="ic_action_approval.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AccountRequestPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="FAQ" Icon="ic_action_help_outline.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AdminFAQPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AdminFAQPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="SearchStation" Icon="ic_action_ev_station.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:ChargingStationsPage}"
+            IsVisible="{Binding IsUser}"
+            Route="ChargingStationsPage" />
     </FlyoutItem>
 
 

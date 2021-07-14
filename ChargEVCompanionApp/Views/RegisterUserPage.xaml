@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:ChargEVCompanionApp.ViewModels.Converter"
     xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
     xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
+    Title="{Binding Title}"
     x:DataType="viewmodel:RegisterUserViewModel">
 
     <ContentPage.BindingContext>
@@ -51,12 +52,8 @@
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource converter}">
                     <MultiBinding.Bindings>
-                        <Binding 
-                            Source="{x:Reference emailEntry}"
-                            Path="Text" />
-                        <Binding 
-                            Source="{x:Reference PasswordEntry}"
-                            Path="Text" />
+                        <Binding Path="Text" Source="{x:Reference emailEntry}" />
+                        <Binding Path="Text" Source="{x:Reference PasswordEntry}" />
                     </MultiBinding.Bindings>
                 </MultiBinding>
             </Button.CommandParameter>

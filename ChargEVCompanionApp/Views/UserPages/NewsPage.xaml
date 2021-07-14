@@ -7,8 +7,8 @@
     xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
     xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:DataType="viewmodels:NewsPageViewModel"
-    Title="{Binding Title}">
+    Title="{Binding Title}"
+    x:DataType="viewmodels:NewsPageViewModel">
 
     <ContentPage.BindingContext>
         <viewmodels:NewsPageViewModel />

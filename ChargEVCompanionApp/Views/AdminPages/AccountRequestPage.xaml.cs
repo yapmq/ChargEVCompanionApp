@@ -15,6 +15,18 @@ namespace ChargEVCompanionApp.Views.AdminPages
         public AccountRequestPage()
         {
             InitializeComponent();
+
+            
+
+            //var assembly = typeof(AppShell);
+
+            //= ImageSource.FromResource("TravelRecordApp.Assets.Images.plane.png", assembly);
+        }
+
+        private void RequestList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            RequestList.SelectedItem = null;
+
         }
     }
 }

@@ -11,27 +11,67 @@ namespace ChargEVCompanionApp.ViewModels
 
         private bool isAdmin;
 
-        public bool IsAdmin { get => isAdmin; set => SetProperty(ref isAdmin, value); }
+        //public bool IsAdmin { get => isAdmin; set => SetProperty(ref isAdmin, value); }
+
+        public bool IsAdmin
+        {
+            get { return isAdmin; }
+            set
+            {
+                isAdmin = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool isUser;
+
+        public bool IsUser
+        {
+            get { return isUser; }
+            set
+            {
+                isUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
 
         public AppShellViewModel()
         {
-            //MessagingCenter.Subscribe<LoginPage>(this, message: "admin", (sender) =>
-            //  {
-            //      IsAdmin = true;
-            //  });
-            //MessagingCenter.Subscribe<LoginPage>(this, message: "user", (sender) =>
-            //{
-            //    IsAdmin = false; ;
-            //});
-            string role = App.globaluser.Role;
-            if (role == "Admin")
+            MessagingCenter.Subscribe<LoginPageViewModel>(this, message: "admin", (sender) =>
             {
-                isAdmin = true;
-            }
-            else
+                IsAdmin = true;
+                IsUser = false;
+
+            });
+
+            MessagingCenter.Subscribe<LoginPageViewModel>(this, message: "user", (sender) =>
             {
-                isAdmin = false;
-            }
+                IsAdmin = false;
+                IsUser = true;
+            });
         }
+
+
+
+
+        //void Validate()
+        //{
+
+        //}
+        //{
+        //    string role = App.globaluser.Role;
+        //    if (role == "Admin")
+        //    {
+        //        isAdmin = true;
+        //    }
+        //    else
+        //    {
+        //        isAdmin = false;
+        //    }
+        //}
     }
 }
+

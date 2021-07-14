@@ -1,5 +1,6 @@
 ﻿using ChargEVCompanionApp.Models;
 using ChargEVCompanionApp.Services;
+using ChargEVCompanionApp.Views;
 using ChargEVCompanionApp.Views.UserPages;
 using MvvmHelpers.Commands;
 using System;
@@ -68,8 +69,18 @@ namespace ChargEVCompanionApp.ViewModels
             {
                 if (!string.IsNullOrWhiteSpace(User.Email) && !string.IsNullOrWhiteSpace(User.Password))
                 {
-                    await UserService.ValidateLogin(User.Email, User.Password);
+                    bool canlogin = await UserService.ValidateLogin(User.Email, User.Password);
+                    if (canlogin)
+                    {
+                        string userRole = App.globaluser.Role.ToLower();
 
+                        MessagingCenter.Send<LoginPageViewModel>(this,
+                            (userRole == "admin") ? "admin" : "user"
+                            );
+
+                        await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+                    }
+                    return;
                 }
                 else
                 {
@@ -81,7 +92,6 @@ namespace ChargEVCompanionApp.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Empty fields!", "OK");
             }
         }
-
-
     }
 }
+
