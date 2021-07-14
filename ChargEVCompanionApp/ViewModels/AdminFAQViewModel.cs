@@ -5,25 +5,21 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.ViewModels
 {
-    public class NewsPageViewModel : ViewModelBase
+    public class AdminFAQViewModel : ViewModelBase
     {
-        public ObservableRangeCollection<News> NewsList { get; set; }
+        public ObservableRangeCollection<Questions> QuestionList { get; set; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
-        public NewsPageViewModel()
+        public AdminFAQViewModel()
         {
-            Title = "News and Media";
-            NewsList = new ObservableRangeCollection<News>();
-            //NewsList.Add(new News { Title = "hello world", Context = "testing123", DateCreated = DateTime.Today });
+            Title = "Frequently Asked Questions";
+            QuestionList = new ObservableRangeCollection<Questions>();
 
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
@@ -42,17 +38,17 @@ namespace ChargEVCompanionApp.ViewModels
 
             await Task.Delay(2000);
 
-            NewsList.Clear();
-            var news = await NewsService.GetNews();
-            NewsList.AddRange(news);
+            QuestionList.Clear();
+            var question = await QuestionService.GetQuestion();
+            QuestionList.AddRange(question);
 
             IsBusy = false;
         }
 
-        
+
         async Task Add()
         {
-            var route = nameof(AddNewsPage);
+            var route = nameof(NewFAQPage);
             await Shell.Current.GoToAsync(route);
         }
     }

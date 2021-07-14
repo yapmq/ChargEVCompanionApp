@@ -4,6 +4,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Microsoft.WindowsAzure.MobileServices;
+using System.IO;
+using Xamarin.Essentials;
 
 namespace ChargEVCompanionApp.Droid
 {
@@ -19,9 +22,17 @@ namespace ChargEVCompanionApp.Droid
 
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this,savedInstanceState);
-            
+            CurrentPlatform.Init();
 
-            LoadApplication(new App());
+            //string dbName = "chargev_db.sqlite";
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "chargev_db.sqlite");
+            //string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            //string fullPath = Path.Combine(folderPath, dbName);
+
+            LoadApplication(new App(databasePath));
+
+
+            //LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

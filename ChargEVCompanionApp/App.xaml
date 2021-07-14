@@ -52,13 +52,13 @@
             <Color x:Key="SystemGray5Dark">#2C2C2E</Color>
             <Color x:Key="SystemGray6Dark">#1C1C1E</Color>
 
-            <!--<Style x:Key="CoffeeListView" TargetType="ListView">
+            <Style x:Key="StationListView" TargetType="ListView">
                 <Setter Property="HasUnevenRows" Value="True" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="SeparatorVisibility" Value="None" />
                 <Setter Property="RefreshControlColor" Value="{StaticResource SystemBlue}" />
                 <Setter Property="IsPullToRefreshEnabled" Value="True" />
-            </Style>-->
+            </Style>
 
             <Style x:Key="BaseRefreshView" TargetType="RefreshView">
                 <Setter Property="RefreshColor" Value="{StaticResource SystemBlue}" />
@@ -107,13 +107,13 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
-            <!--<Style x:Key="CoffeeCard" TargetType="Frame">
+            <Style x:Key="Card" TargetType="Frame">
                 <Setter Property="HasShadow" Value="{OnPlatform Android=true, iOS=false, Default=true}" />
                 <Setter Property="CornerRadius" Value="20" />
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource CardBackgroundDark}, Light={StaticResource CardBackground}}" />
             </Style>
 
-            <x:String x:Key="IconCoffee">&#xf0f4;</x:String>-->
+            <x:String x:Key="IconCoffee">&#xf0f4;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -3,9 +3,15 @@
     x:Class="ChargEVCompanionApp.AppShell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ChargEVCompanionApp.Views"
-    xmlns:views="clr-namespace:ChargEVCompanionApp.Views.UserPages"
+    xmlns:adminviews="clr-namespace:ChargEVCompanionApp.Views.AdminPages"
+    xmlns:userviews="clr-namespace:ChargEVCompanionApp.Views.UserPages"
+    xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:views="clr-namespace:ChargEVCompanionApp.Views"
     Title="ChargEVCompanionApp">
+
+    <Shell.BindingContext>
+        <viewmodel:AppShellViewModel />
+    </Shell.BindingContext>
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -86,8 +92,72 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <FlyoutItem Title="News" Icon="icon_about.png">
-        <ShellContent ContentTemplate="{DataTemplate views:NewsPage}" Route="News" />
+    <ShellItem FlyoutItemIsVisible="False" Route="LoginPage">
+        <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
+    </ShellItem>
+
+    <!--<FlyoutItem Title="Browse" Icon="tab_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate userviews:NewsPage}" Route="ItemsPage" />
     </FlyoutItem>
+    <FlyoutItem Title="About" Icon="tab_about.png">
+        <ShellContent ContentTemplate="{DataTemplate userviews:ChargingStationsPage}" Route="main" />
+    </FlyoutItem>
+    <FlyoutItem Title="Admin" Icon="tab_about.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AdminPage" />
+    </FlyoutItem>-->
+
+
+    <FlyoutItem Title="News" Icon="icon_feed.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:NewsPage}"
+            IsVisible="{Binding IsUser}"
+            Route="News" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Add Station"
+        x:DataType="viewmodel:AppShellViewModel"
+        Icon="ic_action_ev_station.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AddStationPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AddStationPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Maps" Icon="ic_action_map.png">
+        <ShellContent ContentTemplate="{DataTemplate userviews:MapPage}" Route="MapPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="News" Icon="icon_feed.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AdminNewsPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AdminNewsPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Account Approval" Icon="ic_action_approval.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AccountRequestPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="FAQ" Icon="ic_action_help_outline.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AdminFAQPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AdminFAQPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="SearchStation" Icon="ic_action_ev_station.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:ChargingStationsPage}"
+            IsVisible="{Binding IsUser}"
+            Route="ChargingStationsPage" />
+    </FlyoutItem>
+
 
 </Shell>

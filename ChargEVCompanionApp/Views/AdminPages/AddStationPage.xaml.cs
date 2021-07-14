@@ -20,7 +20,20 @@ namespace ChargEVCompanionApp.Views.AdminPages
         {
             InitializeComponent();
 
-            GetPermissions();
+            //GetPermissions();
+
+        }
+
+        private void venueListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var selectedVenue = venueListView.SelectedItem as Venue;
+
+            if (selectedVenue != null)
+            {
+                Navigation.PushModalAsync(new AddStationDetailsPage(selectedVenue));
+            }
+
+            venueListView.SelectedItem = null;
 
         }
 
@@ -74,74 +87,74 @@ namespace ChargEVCompanionApp.Views.AdminPages
         //    //});
         //}
 
-        private async void GetPermissions()
-        {
-            try
-            {
-                PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-                if (status == PermissionStatus.Denied)
-                {
-                    if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
-                    {
-                        await DisplayAlert("Need your location", "We need to access your location", "OK");
-                    }
+        //private async void GetPermissions()
+        //{
+        //    try
+        //    {
+        //        PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        //        if (status == PermissionStatus.Denied)
+        //        {
+        //            if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
+        //            {
+        //                await DisplayAlert("Need your location", "We need to access your location", "OK");
+        //            }
 
-                    PermissionStatus result = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-                    if (result == PermissionStatus.Granted)
-                    {
-                        status = result;
-                    }
-                }
+        //            PermissionStatus result = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+        //            if (result == PermissionStatus.Granted)
+        //            {
+        //                status = result;
+        //            }
+        //        }
 
-                if (status == PermissionStatus.Granted)
-                {
-                    var locator = CrossGeolocator.Current;
-                    var position = await locator.GetPositionAsync();
+        //        if (status == PermissionStatus.Granted)
+        //        {
+        //            var locator = CrossGeolocator.Current;
+        //            var position = await locator.GetPositionAsync();
 
-                    var venues = await VenueService.GetVenues(position.Latitude, position.Longitude);
-                    venueListView.ItemsSource = venues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
-                }
-                else
-                {
-                    await DisplayAlert("Location denied", "We need your permission to access your location, else you cannot show your location on map", "OK");
-                }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message, "Ok");
-            }
-        }
+        //            var venues = await VenueService.GetVenues(position.Latitude, position.Longitude);
+        //            venueListView.ItemsSource = venues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
+        //        }
+        //        else
+        //        {
+        //            await DisplayAlert("Location denied", "We need your permission to access your location, else you cannot show your location on map", "OK");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await DisplayAlert("Error", ex.Message, "Ok");
+        //    }
+        //}
 
-        private async void LocationSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var updLocator = CrossGeolocator.Current;
-            var updPosition = await updLocator.GetPositionAsync();
-            var updVenues = await VenueService.GetVenues(updPosition.Latitude, updPosition.Longitude);
-            venueListView.BeginRefresh();
-            
+        //private async void LocationSearch_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    var updLocator = CrossGeolocator.Current;
+        //    var updPosition = await updLocator.GetPositionAsync();
+        //    var updVenues = await VenueService.GetVenues(updPosition.Latitude, updPosition.Longitude);
+        //    venueListView.BeginRefresh();
 
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            {
-                venueListView.ItemsSource = updVenues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
-            }
-            else
-            {
-                venueListView.ItemsSource = updVenues.Where(x => x.name.Contains(e.NewTextValue));
-            }//Where(x => x.categories.Count() > 0).Where(x => x.location.address != null).
 
-            venueListView.EndRefresh();
-        }
+        //    if (string.IsNullOrWhiteSpace(e.NewTextValue))
+        //    {
+        //        venueListView.ItemsSource = updVenues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
+        //    }
+        //    else
+        //    {
+        //        venueListView.ItemsSource = updVenues.Where(x => x.name.Contains(e.NewTextValue));
+        //    }//Where(x => x.categories.Count() > 0).Where(x => x.location.address != null).
 
-        private async void venueListView_Refreshing(object sender, EventArgs e)
-        {
-            venueListView.ItemsSource = null;
+        //    venueListView.EndRefresh();
+        //}
 
-            var updLocator = CrossGeolocator.Current;
-            var updPosition = await updLocator.GetPositionAsync();
-            var updVenues = await VenueService.GetVenues(updPosition.Latitude, updPosition.Longitude);
+        //private async void venueListView_Refreshing(object sender, EventArgs e)
+        //{
+        //    venueListView.ItemsSource = null;
 
-            venueListView.ItemsSource = updVenues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
-            venueListView.IsRefreshing = false;
-        }
+        //    var updLocator = CrossGeolocator.Current;
+        //    var updPosition = await updLocator.GetPositionAsync();
+        //    var updVenues = await VenueService.GetVenues(updPosition.Latitude, updPosition.Longitude);
+
+        //    venueListView.ItemsSource = updVenues.Where(x => x.categories.Count() > 0).Where(x => x.location.address != null);
+        //    venueListView.IsRefreshing = false;
+        //}
     }
 }

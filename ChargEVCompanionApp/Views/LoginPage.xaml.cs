@@ -14,7 +14,12 @@ namespace ChargEVCompanionApp.Views
     {
         public LoginPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private async void registerUserButton_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync($"{nameof(RegisterUserPage)}");
         }
     }
 }

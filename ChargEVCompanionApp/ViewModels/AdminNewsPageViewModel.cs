@@ -5,21 +5,18 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.ViewModels
 {
-    public class NewsPageViewModel : ViewModelBase
+    class AdminNewsPageViewModel : ViewModelBase
     {
         public ObservableRangeCollection<News> NewsList { get; set; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
-        public NewsPageViewModel()
+        public AdminNewsPageViewModel()
         {
             Title = "News and Media";
             NewsList = new ObservableRangeCollection<News>();
@@ -49,7 +46,7 @@ namespace ChargEVCompanionApp.ViewModels
             IsBusy = false;
         }
 
-        
+
         async Task Add()
         {
             var route = nameof(AddNewsPage);

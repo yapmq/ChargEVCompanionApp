@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ChargEVCompanionApp.Views.UserPages
+namespace ChargEVCompanionApp.Views.AdminPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewsPage : ContentPage
+    public partial class AdminNewsPage : ContentPage
     {
-        public NewsPage()
+        public AdminNewsPage()
         {
             InitializeComponent();
         }
 
-        private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void NewsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var selectedNews = NewsList.SelectedItem as News;
 
             if (selectedNews != null)
             {
-                await Shell.Current.DisplayAlert(selectedNews.Title, selectedNews.Context, "OK");
+                Navigation.PushModalAsync(new EditNewsPage(selectedNews));
             }
 
             NewsList.SelectedItem = null;
