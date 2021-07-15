@@ -96,25 +96,8 @@
         <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" />
     </ShellItem>
 
-    <!--<FlyoutItem Title="Browse" Icon="tab_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate userviews:NewsPage}" Route="ItemsPage" />
-    </FlyoutItem>
-    <FlyoutItem Title="About" Icon="tab_about.png">
-        <ShellContent ContentTemplate="{DataTemplate userviews:ChargingStationsPage}" Route="main" />
-    </FlyoutItem>
-    <FlyoutItem Title="Admin" Icon="tab_about.png">
-        <ShellContent
-            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
-            IsVisible="{Binding IsAdmin}"
-            Route="AdminPage" />
-    </FlyoutItem>-->
-
-
-    <FlyoutItem Title="News" Icon="icon_feed.png">
-        <ShellContent
-            ContentTemplate="{DataTemplate userviews:NewsPage}"
-            IsVisible="{Binding IsUser}"
-            Route="News" />
+    <FlyoutItem Title="ChargEVCompanionApp" Icon="ic_action_map.png">
+        <ShellContent ContentTemplate="{DataTemplate userviews:MapPage}" Route="MapPage" />
     </FlyoutItem>
 
     <FlyoutItem
@@ -127,8 +110,11 @@
             Route="AddStationPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Maps" Icon="ic_action_map.png">
-        <ShellContent ContentTemplate="{DataTemplate userviews:MapPage}" Route="MapPage" />
+    <FlyoutItem Title="Account Approval" Icon="ic_action_approval.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
+            IsVisible="{Binding IsAdmin}"
+            Route="AccountRequestPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="News" Icon="icon_feed.png">
@@ -136,13 +122,6 @@
             ContentTemplate="{DataTemplate adminviews:AdminNewsPage}"
             IsVisible="{Binding IsAdmin}"
             Route="AdminNewsPage" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Account Approval" Icon="ic_action_approval.png">
-        <ShellContent
-            ContentTemplate="{DataTemplate adminviews:AccountRequestPage}"
-            IsVisible="{Binding IsAdmin}"
-            Route="AccountRequestPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="FAQ" Icon="ic_action_help_outline.png">
@@ -158,6 +137,43 @@
             IsVisible="{Binding IsUser}"
             Route="ChargingStationsPage" />
     </FlyoutItem>
+
+    <FlyoutItem Title="My Charger" Icon="ic_action_battery_charging_full.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:MyChargePage}"
+            IsVisible="{Binding IsUser}"
+            Route="MyChargePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Membership" Icon="ic_action_credit_card.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:MembershipPage}"
+            IsVisible="{Binding IsUser}"
+            Route="MembershipPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="News" Icon="icon_feed.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:NewsPage}"
+            IsVisible="{Binding IsUser}"
+            Route="News" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="FAQ" Icon="ic_action_help_outline.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:FAQPage}"
+            IsVisible="{Binding IsUser}"
+            Route="FAQPage" />
+    </FlyoutItem>
+
+
+    <FlyoutItem Title="My Profile" Icon="ic_action_account_circle.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate userviews:ProfilePage}"
+            IsVisible="{Binding IsUser}"
+            Route="ProfilePage" />
+    </FlyoutItem>
+
 
 
 </Shell>

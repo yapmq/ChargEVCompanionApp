@@ -1,7 +1,9 @@
 ﻿using ChargEVCompanionApp.Views;
+using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.ViewModels
@@ -10,7 +12,7 @@ namespace ChargEVCompanionApp.ViewModels
     {
 
         private bool isAdmin;
-
+        
         //public bool IsAdmin { get => isAdmin; set => SetProperty(ref isAdmin, value); }
 
         public bool IsAdmin
@@ -52,7 +54,10 @@ namespace ChargEVCompanionApp.ViewModels
                 IsAdmin = false;
                 IsUser = true;
             });
+            
         }
+
+        
 
 
 

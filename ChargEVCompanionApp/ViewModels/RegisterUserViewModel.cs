@@ -51,24 +51,23 @@ namespace ChargEVCompanionApp.ViewModels
                     if (canRegister)
                     {
                         await UserService.RegisterUser(input);
-                        await App.Current.MainPage.DisplayAlert("Registration requested", "Please wait for approval", "OK");
+                        await Shell.Current.DisplayAlert("Registration requested", "Please wait for approval", "OK");
                     }
                     else
                     {
-                        await App.Current.MainPage.DisplayAlert("Error", "Record exists! Please login", "OK"); //change to shell
+                        await Shell.Current.DisplayAlert("Error", "Record exists! Please login", "OK");
                     }
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", "Password not matched", "OK");//change to shell
+                    await Shell.Current.DisplayAlert("Error", "Password not matched", "OK");
                 }
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Empty fields", "OK");//change to shell
+                await Shell.Current.DisplayAlert("Error", "Empty fields", "OK");
             }
         }
-
 
 
         public async Task<bool> CheckRegister(Users user)

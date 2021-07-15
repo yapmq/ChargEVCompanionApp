@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.UserPages.ActiveChargerDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <StackLayout
+        Padding="20,0"
+        CompressedLayout.IsHeadless="True"
+        VerticalOptions="Center">
+
+        <Grid>
+            <Label
+                x:Name="LocationLabel"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource LabelLarge}"
+                Text="venue of the station" />
+            <Label
+                x:Name="StationNameLabel"
+                Grid.Row="1"
+                Style="{StaticResource LabelMedium}"
+                Text="name of station" />
+            <Label
+                x:Name="ChargerStatus"
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Style="{StaticResource LabelMedium}"
+                Text="Status"
+                TextColor="#00709D" />
+            <Label
+                x:Name="AddressLabel"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource BaseLabel}"
+                Text="address of the station"
+                TextColor="#939393" />
+            <Label
+                x:Name="LatitudeLabel"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource BaseLabel}"
+                Text="coordinates"
+                TextColor="#939393" />
+            <Label
+                x:Name="LongtitudeLabel"
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource BaseLabel}"
+                Text="coordinates"
+                TextColor="#939393" />
+            <Entry
+                x:Name="CodeEntry"
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                HorizontalTextAlignment="Center"
+                Keyboard="Numeric"
+                MaxLength="4"
+                Placeholder="Enter the correct code"
+                TextColor="#939393" />
+
+
+            <Button
+                x:Name="ActivateButton"
+                Grid.Row="6"
+                Margin="30,0"
+                Clicked="ActivateButton_Clicked"
+                Style="{StaticResource ButtonOutline}"
+                Text="Activate" />
+            <Button
+                x:Name="CancelButoon"
+                Grid.Row="6"
+                Grid.Column="1"
+                Clicked="CancelButoon_Clicked"
+                Style="{StaticResource ButtonOutline}"
+                Text="Cancel" />
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
+
+<!--    -->

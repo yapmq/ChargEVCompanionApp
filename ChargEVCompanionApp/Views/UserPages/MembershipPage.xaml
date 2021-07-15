@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.UserPages.MembershipPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    Title="chargEV Pass">
+
+    
+
+
+    <StackLayout>
+        <StackLayout Margin="0,80,0,20" VerticalOptions="Center">
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelLarge}"
+                Text="Current Active Pass: "
+                VerticalOptions="CenterAndExpand" />
+            <Label
+                x:Name="SubLabel"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelLarge}"
+                Text=""
+                VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelMedium}"
+                Text="Valid Until:"
+                VerticalOptions="CenterAndExpand" />
+            <Label
+                x:Name="timeLabel"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelMedium}"
+                Text=""
+                VerticalOptions="CenterAndExpand" />
+            <Button
+                x:Name="GetButton"
+                Clicked="GetButton_Clicked"
+                Style="{StaticResource ButtonOutline}"
+                Text="Get Pass" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
+
+<!--
+    {Binding Subtype}
+    {Binding TimeRemaining}
+    x:Name="subtype"
+    x:Name="teim"
+-->

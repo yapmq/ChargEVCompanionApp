@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.UserPages.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <StackLayout
+        x:Name="containersStackLayout"
+        Margin="25,25,25,25"
+        CompressedLayout.IsHeadless="True"
+        VerticalOptions="Center">
+        <Label Style="{StaticResource LabelMedium}" Text="Email:" />
+        <Entry
+            x:Name="EmailEntry"
+            IsReadOnly="true"
+            Text="email" />
+        <Label Style="{StaticResource LabelMedium}" Text="New Password:" />
+        <Entry
+            x:Name="PasswordEntry"
+            IsPassword="True"
+            Placeholder="Password"
+            Style="{StaticResource LabelMedium}"
+            Text="" />
+        <Entry
+            x:Name="confirmPasswordEntry"
+            IsPassword="True"
+            Placeholder="Confirm password"
+            Style="{StaticResource LabelMedium}"
+            Text="" />
+        <Button
+            x:Name="registerButton"
+            Margin="0,50,0,0"
+            BackgroundColor="{StaticResource SystemBlue}"
+            Clicked="registerButton_Clicked"
+            Text="Register"
+            TextColor="White" />
+
+    </StackLayout>
+</ContentPage>

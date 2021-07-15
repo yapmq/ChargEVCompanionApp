@@ -11,17 +11,16 @@ namespace ChargEVCompanionApp
 {
     public partial class App : Application
     {
-        public static string DatabaseLocation;//
+        public static string DatabaseLocation;
         public static MobileServiceClient MobileService = new MobileServiceClient("https://chargevcompanionapp.azurewebsites.net");
 
-        //public static IMobileServiceSyncTable<ChargingStations> chargingstations; //
-        public static Users globaluser = new Users();//
-        public App()
-        {
-            InitializeComponent();
+        public static Users globaluser = new Users(); //to store specific user id upon logged in
+        //public App()
+        //{
+        //    InitializeComponent();
 
-            //MainPage = new RegisterUserPage();
-        }
+        //    //MainPage = new RegisterUserPage();
+        //}
 
         public App(string databaseLocation) ////
         {
@@ -30,14 +29,14 @@ namespace ChargEVCompanionApp
             MainPage = new AppShell();
 
             DatabaseLocation = databaseLocation;
-
-            //var store = new MobileServiceSQLiteStore(databaseLocation);
-            //store.DefineTable<ChargingStations>();
-
-            //MobileService.SyncContext.InitializeAsync(store);
-
-            //chargingstations = MobileService.GetSyncTable<ChargingStations>();
         }
+
+        //var store = new MobileServiceSQLiteStore(databaseLocation);
+        //store.DefineTable<ChargingStations>();
+
+        //MobileService.SyncContext.InitializeAsync(store);
+
+        //chargingstations = MobileService.GetSyncTable<ChargingStations>();
 
         protected override void OnStart()
         {

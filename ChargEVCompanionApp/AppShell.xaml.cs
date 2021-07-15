@@ -19,8 +19,17 @@ namespace ChargEVCompanionApp
             Routing.RegisterRoute(nameof(RegisterUserPage),
                 typeof(RegisterUserPage));
 
+            Routing.RegisterRoute(nameof(LoginPage),
+                typeof(LoginPage));
+
             Routing.RegisterRoute(nameof(NewFAQPage),
                 typeof(NewFAQPage));
+
+            Routing.RegisterRoute(nameof(MemberRegisterPage),
+                typeof(MemberRegisterPage));
+
+            Routing.RegisterRoute(nameof(PassPaymentPage),
+                typeof(PassPaymentPage));
         }
 
     }
