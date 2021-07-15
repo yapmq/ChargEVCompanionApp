@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChargEVCompanionApp.Views.UserPages.MyChargePage"
+             xmlns:vm ="clr-namespace:ChargEVCompanionApp.ViewModels">
+
+    <!--<ContentPage.BindingContext>
+        <vm:MyChargerViewModel />
+    </ContentPage.BindingContext>-->
+
+    <!--<RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">-->
+        <StackLayout>
+            <StackLayout Margin="0,80,0,20" VerticalOptions="Center">
+                <Label
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelLarge}"
+                Text="Current Charging: "
+                VerticalOptions="CenterAndExpand" />
+                <Label
+                x:Name="StationLabel"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelLarge}"
+                Text=""
+                VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout VerticalOptions="StartAndExpand">
+                <Label
+                HorizontalOptions="CenterAndExpand"
+                x:Name="timelabel0"
+                Style="{StaticResource LabelMedium}"
+                Text="You have charged for:"
+                VerticalOptions="CenterAndExpand" />
+                <Label
+                x:Name="timeLabel"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelMedium}"
+                Text=""
+                VerticalOptions="CenterAndExpand" />
+                <Button
+                x:Name="UnplugBUtton"
+                Clicked="UnplugBUtton_Clicked"
+                Style="{StaticResource ButtonOutline}"
+                Text="Un-plug charger" />
+            </StackLayout>
+        </StackLayout>
+    <!--</RefreshView>-->
+    
+</ContentPage>

@@ -4,7 +4,20 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:vm="clr-namespace:ChargEVCompanionApp.ViewModels"
     Title="Maps">
+    
+    <ContentPage.BindingContext>
+        <vm:MapViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="AddToolBarrItem"
+            Command="{Binding LogoutCommand}"
+            Text="Logouot" />
+    </ContentPage.ToolbarItems>
+
     <maps:Map
         x:Name="LocationMap"
         HorizontalOptions="FillAndExpand"

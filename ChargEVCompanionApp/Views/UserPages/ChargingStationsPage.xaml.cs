@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChargEVCompanionApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,24 @@ namespace ChargEVCompanionApp.Views.UserPages
     {
         public ChargingStationsPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if (StationList.SelectedItem != null)
+            {
+                var selectedStation = StationList.SelectedItem as ChargingStations;
+                Navigation.PushModalAsync(new ActiveChargerDetailsPage(selectedStation));
+            }
 
+
+            StationList.SelectedItem = null;
+        }
+
+        private void statusLabel_BindingContextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

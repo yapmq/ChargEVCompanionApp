@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.UserPages.MemberRegisterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Pass Registration">
+
+
+    <StackLayout Margin="16,20,16,0" CompressedLayout.IsHeadless="True" VerticalOptions="CenterAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                
+            </Grid.RowDefinitions>
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelMedium}"
+                Text="Choose a pass:"
+                VerticalOptions="CenterAndExpand" />
+
+            <Picker
+                x:Name="PassPicker"
+                Title="Select a Pass"
+                Grid.Column="1"
+                FontSize="Medium"
+                SelectedIndexChanged="PassPicker_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>One-day pass</x:String>
+                    <x:String>7-day pass</x:String>
+                    <x:String>Monthly pass</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label
+                Grid.Row="1"
+                x:Name="LabelPrice"
+                Style="{StaticResource LabelMedium}"
+                Text="Price: RM"
+                HorizontalOptions="End"/>
+            <Label
+                x:Name="priceLabel"
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource LabelMedium}"
+                Text="price" />
+            <Button
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Clicked="Button_Clicked"
+                HorizontalOptions="Center"
+                Style="{StaticResource ButtonOutline}"
+                Text="Register" />
+        </Grid>
+    </StackLayout>
+</ContentPage>

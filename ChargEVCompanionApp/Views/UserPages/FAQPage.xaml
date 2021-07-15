@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChargEVCompanionApp.Views.UserPages.FAQPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ChargEVCompanionApp.Models"
+    xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+    xmlns:viewmodels="clr-namespace:ChargEVCompanionApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{Binding Title}"
+    x:DataType="viewmodels:FAQPageViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:FAQPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ListView
+        x:Name="QuestionList"
+        CachingStrategy="RecycleElement"
+        IsPullToRefreshEnabled="True"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemSelected="QuestionList_ItemSelected"
+        ItemsSource="{Binding QuestionList}"
+        RefreshCommand="{Binding RefreshCommand}"
+        SelectionMode="Single">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Questions">
+                <TextCell Detail="{Binding createdAt, StringFormat='{0:MM/dd/yyyy}'}" Text="{Binding Question}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

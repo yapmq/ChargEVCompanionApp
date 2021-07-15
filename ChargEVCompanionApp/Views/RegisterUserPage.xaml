@@ -28,24 +28,21 @@
             x:Name="emailEntry"
             Keyboard="Email"
             Placeholder="Email address"
-            Text="{Binding Email, Mode=TwoWay}"
-            TextColor="Blue" />
+            Text="{Binding Email, Mode=TwoWay}" />
         <Entry
             x:Name="PasswordEntry"
             IsPassword="True"
             Placeholder="Password"
-            Text="{Binding Password, Mode=TwoWay}"
-            TextColor="Blue" />
+            Text="{Binding Password, Mode=TwoWay}" />
         <Entry
             x:Name="confirmPasswordEntry"
             IsPassword="True"
             Placeholder="Confirm password"
-            Text="{Binding ConfirmPassword, Mode=TwoWay}"
-            TextColor="Blue" />
+            Text="{Binding ConfirmPassword, Mode=TwoWay}" />
         <Button
             x:Name="registerButton"
             Margin="0,50,0,0"
-            BackgroundColor="Blue"
+            BackgroundColor="{StaticResource SystemBlue}"
             Command="{Binding RegisterCommand}"
             Text="Register"
             TextColor="White">

@@ -8,8 +8,8 @@
     xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
     xmlns:viewmodel="clr-namespace:ChargEVCompanionApp.ViewModels"
     x:Name="ChargingPage"
-    x:DataType="viewmodel:ChargingStationViewModel"
-    Title="Charging Stations">
+    Title="Charging Stations"
+    x:DataType="viewmodel:ChargingStationViewModel">
 
     <ContentPage.BindingContext>
         <viewmodel:ChargingStationViewModel />
@@ -23,6 +23,7 @@
 
 
     <ListView
+        x:Name="StationList"
         CachingStrategy="RecycleElement"
         GroupDisplayBinding="{Binding Key}"
         IsGroupingEnabled="True"
@@ -51,13 +52,15 @@
                                     <Label
                                         Style="{StaticResource LabelMedium}"
                                         Text="{Binding StationType}"
-                                        VerticalOptions="Center"
-                                        TextColor="#939393"/>
+                                        TextColor="#939393"
+                                        VerticalOptions="Center" />
                                     <Label
+                                        x:Name="statusLabel"
+                                        BindingContextChanged="statusLabel_BindingContextChanged"
                                         Style="{StaticResource LabelMedium}"
                                         Text="{Binding IsActive, Converter={StaticResource converter}}"
-                                        VerticalOptions="Center"
-                                        TextColor="#A8D061"/>
+                                        TextColor="#00709D"
+                                        VerticalOptions="Center" />
                                 </StackLayout>
                             </StackLayout>
                         </Frame>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ChargEVCompanionApp.ViewModels
 {
@@ -36,8 +37,9 @@ namespace ChargEVCompanionApp.ViewModels
             {
                 user.IsActive = true;
                 await UserService.Update(user);
-            }
-                
+
+                await Shell.Current.DisplayAlert("Success", "User's account is approved", "OK");
+            }               
            
         }
 
